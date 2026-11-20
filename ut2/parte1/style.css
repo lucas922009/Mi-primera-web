@@ -1,0 +1,58 @@
+:root {
+     --background: #fefefe;
+     --text: #041c3f;
+    --accent: #a5e070;
+    --accent-light: #e3ecf3;
+    --border: #d6e0ea;
+     --link: #017ce9;
+}
+
+nav {
+    background-color: var(--accent-light);
+    border: 0.1rem solid var(--border);
+    padding: 0.003rem;
+    border-radius: 12px;
+    margin: 1rem 0;
+}
+  body {
+ max-width: 65rem;
+  margin: 0 auto;
+   }
+ header {
+     line-height: 1.5rem;
+    border-bottom: 0.2rem solid var(--accent);
+    border-color: var(--accent);
+
+}
+nav a   {
+    color: var(--link);
+}
+h1, h2, h3, h4, h5 {
+color: var(--text);
+font-family: arial, sans-serif;
+font-size: 1.1rem;
+ line-height: 1.1;
+}
+ol a{
+    color: var(--link);
+}
+aside {
+    line-height: 1.5rem;
+    border-bottom: 0.1rem solid var(--border);
+    border-color: var(--border);
+}
+table th {
+    color: var(--text);
+}
+
+strong {
+    color: var(--text);
+}
+h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+h2 {
+    font-size: 2rem;
+    font-weight:bold;
+}

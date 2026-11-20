@@ -1,0 +1,659 @@
+/* ==========================================================================
+   1. VARIABLES Y CONFIGURACIÓN BASE (Estética Cyber-Arcade)
+   ========================================================================== */
+:root {
+  --bg-dark: #090617;
+  --bg-card: rgba(25, 19, 54, 0.72);
+  --neon-cyan: #00f5d4;
+  --neon-pink: #ff007f;
+  --neon-yellow: #fee440;
+  --neon-purple: #9b5de5;
+  --text-main: #f8f9fa;
+  --text-muted: #b8c0ff;
+  --border-glow: 1px solid rgba(0, 245, 212, 0.35);
+  --shadow-brutal: 5px 5px 0px var(--neon-pink);
+  --shadow-cyan: 5px 5px 0px var(--neon-cyan);
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  color: var(--text-main);
+  background-color: var(--bg-dark);
+}
+
+/* Fondo vibrante con degradados radiales neón y malla sutil */
+body {
+  background-image: 
+    radial-gradient(circle at 12% 15%, rgba(255, 0, 127, 0.35) 0%, transparent 40%),
+    radial-gradient(circle at 88% 25%, rgba(0, 245, 212, 0.3) 0%, transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba(155, 93, 229, 0.35) 0%, transparent 50%),
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 35px 35px, 35px 35px;
+  background-attachment: fixed;
+  line-height: 1.65;
+  display: grid;
+  grid-template-columns: 1fr min(1150px, 92%) 1fr;
+  gap: 1.5rem 0;
+}
+
+body > * {
+  grid-column: 2;
+}
+
+/* ==========================================================================
+   2. HEADER DE IMPACTO Y NAVEGACIÓN FLOTANTE (Glassmorphism)
+   ========================================================================== */
+header {
+  text-align: center;
+  padding: 3.5rem 1.5rem 2rem;
+  position: relative;
+}
+
+header h1 {
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-yellow), var(--neon-pink));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: flujoColor 4s linear infinite;
+  filter: drop-shadow(0 0 18px rgba(0, 245, 212, 0.4));
+}
+
+@keyframes flujoColor {
+  to { background-position: 200% center; }
+}
+
+header p {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.4rem 1.2rem;
+  background: var(--neon-pink);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  transform: rotate(-1.5deg);
+  box-shadow: 4px 4px 0px var(--neon-yellow);
+}
+
+/* Barra de navegación pegajosa con desenfoque de cristal */
+nav {
+  position: sticky;
+  top: 1rem;
+  z-index: 100;
+  background: rgba(15, 10, 40, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 2px solid var(--neon-cyan);
+  border-radius: 50px;
+  padding: 0.6rem 1.2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 245, 212, 0.25);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+/* ==========================================================================
+   3. EFECTOS INNOVADORES AL PASAR EL RATÓN (Cuadros y trazados dinámicos)
+   ========================================================================== */
+
+/* Efecto de cuadro resaltado alrededor de los enlaces del menú */
+nav a {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  padding: 0.5rem 1.1rem;
+  border-radius: 30px;
+  border: 2px solid transparent;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+nav a:hover {
+  color: var(--bg-dark);
+  background: var(--neon-cyan);
+  border-color: var(--neon-yellow);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 245, 212, 0.6);
+}
+
+/* Cuadro expansivo con esquinas iluminadas para los enlaces externos */
+main ol a {
+  position: relative;
+  display: inline-block;
+  color: var(--neon-cyan);
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  transition: color 0.3s ease;
+  z-index: 1;
+}
+
+main ol a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--neon-pink);
+  border-radius: 6px;
+  background: rgba(255, 0, 127, 0.15);
+  transform: scale(0.85);
+  opacity: 0;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: -1;
+}
+
+main ol a:hover {
+  color: var(--neon-yellow);
+}
+
+main ol a:hover::before {
+  transform: scale(1);
+  opacity: 1;
+  box-shadow: 0 0 12px var(--neon-pink);
+}
+
+/* Palabras clave (strong) que encienden un marco alrededor al pasar el ratón */
+main p strong, main li strong {
+  color: var(--neon-yellow);
+  padding: 0.1rem 0.45rem;
+  border-radius: 6px;
+  border: 1.5px solid transparent;
+  transition: all 0.25s ease;
+  cursor: default;
+}
+
+main p strong:hover, main li strong:hover {
+  border-color: var(--neon-cyan);
+  background: rgba(0, 245, 212, 0.15);
+  box-shadow: 0 0 12px rgba(0, 245, 212, 0.5);
+  color: #fff;
+}
+
+/* ==========================================================================
+   4. CONTENIDO PRINCIPAL Y TARJETAS MODERNAS
+   ========================================================================== */
+main, aside {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: var(--border-glow);
+  border-radius: var(--radius);
+  padding: 2.2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+}
+
+h2 {
+  font-size: 2rem;
+  color: var(--neon-cyan);
+  margin-bottom: 1rem;
+  display: inline-block;
+  border-bottom: 4px solid var(--neon-pink);
+  padding-bottom: 0.2rem;
+}
+
+h3 {
+  font-size: 1.35rem;
+  color: var(--neon-yellow);
+  margin: 2rem 0 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+h3::before {
+  content: "⚡";
+  font-size: 1.1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: var(--text-main);
+}
+
+/* Tarjetas interactivas para la lista de personajes */
+main ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+main ul li {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px solid rgba(155, 93, 229, 0.5);
+  border-radius: 12px;
+  padding: 1.1rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+main ul li:hover {
+  transform: translateY(-5px);
+  border-color: var(--neon-cyan);
+  background: rgba(0, 245, 212, 0.08);
+  box-shadow: var(--shadow-brutal);
+}
+
+main ol {
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* ==========================================================================
+   5. TABLA TÉCNICA ESTILO HUD GAMER
+   ========================================================================== */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 1rem;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid var(--neon-purple);
+  box-shadow: var(--shadow-cyan);
+}
+
+caption {
+  caption-side: bottom;
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+th, td {
+  padding: 0.9rem 1.2rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+th {
+  background: rgba(155, 93, 229, 0.3);
+  color: var(--neon-cyan);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  width: 35%;
+}
+
+tr {
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+tr:hover td, tr:hover th {
+  background: rgba(255, 0, 127, 0.2);
+  color: #fff;
+}
+
+/* ==========================================================================
+   6. FORMULARIO INTERACTIVO CON SELECTOR :HAS() MODERNO
+   ========================================================================== */
+form {
+  background: rgba(9, 6, 23, 0.65);
+  padding: 1.5rem;
+  border-radius: 14px;
+  border: 1.5px dashed var(--neon-cyan);
+  margin-top: 1rem;
+}
+
+.notas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+
+/* Botones de puntuación del 1 al 10 interactivos */
+.notas label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.notas input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Resalta el cuadro al pasar el ratón */
+.notas label:hover {
+  border-color: var(--neon-yellow);
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: 0 0 12px rgba(254, 228, 64, 0.6);
+}
+
+/* CSS Moderno (:has): Cuando seleccionas una nota, el cuadro cambia por completo */
+.notas label:has(input:checked) {
+  background: var(--neon-pink);
+  border-color: var(--neon-yellow);
+  color: #fff;
+  transform: scale(1.12);
+  box-shadow: 3px 3px 0px var(--neon-cyan);
+}
+
+textarea {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.9rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid rgba(0, 245, 212, 0.4);
+  color: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--neon-pink);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 18px rgba(255, 0, 127, 0.45);
+}
+
+button[type="submit"] {
+  background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+  color: #fff;
+  border: 2px solid var(--neon-yellow);
+  padding: 0.85rem 2rem;
+  font-size: 1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: var(--shadow-cyan);
+  transition: all 0.2s ease;
+}
+
+button[type="submit"]:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0px var(--neon-yellow);
+  filter: brightness(1.15);
+}
+
+button[type="submit"]:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0px var(--neon-cyan);
+}
+
+/* ==========================================================================
+   7. GALERÍA BENTO GRID Y EFECTOS EN IMÁGENES
+   ========================================================================== */
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+figure {
+  position: relative;
+  background: #120d2b;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 2px solid rgba(0, 245, 212, 0.3);
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* La imagen destacada ocupa 2 columnas en pantallas grandes */
+@media (min-width: 768px) {
+  figure.destacada {
+    grid-column: span 2;
+  }
+}
+
+figure:hover {
+  transform: translateY(-6px) scale(1.01);
+  border-color: var(--neon-pink);
+  box-shadow: 0 12px 25px rgba(255, 0, 127, 0.35), var(--shadow-cyan);
+}
+
+figure img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+figure.destacada img {
+  height: 300px;
+}
+
+figure:hover img {
+  transform: scale(1.07);
+}
+
+.etiqueta {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  background: var(--neon-yellow);
+  color: var(--bg-dark);
+  font-weight: 900;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  box-shadow: 3px 3px 0px var(--neon-pink);
+}
+
+figcaption {
+  padding: 1rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  background: rgba(9, 6, 23, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+   8. FOOTER
+   ========================================================================== */
+footer {
+  text-align: center;
+  padding: 2rem 1rem 3rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+footer em {
+  font-style: normal;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--neon-purple);
+  background: rgba(155, 93, 229, 0.15);
+  color: var(--neon-cyan);
+}
+/* ==========================================================================
+   EFECTOS INNOVADORES PARA TÍTULOS (NUEVO)
+   ========================================================================== */
+
+/* Efecto general para los títulos de sección (h2) */
+main h2, aside h2 {
+  position: relative;
+  display: inline-block;
+  color: var(--neon-cyan);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 4px solid var(--neon-pink);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+}
+
+/* Línea de luz deslizante tipo escaneo cyberpunk al poner el ratón */
+main h2::after, aside h2::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: -100%;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--neon-yellow), #fff);
+  animation: none;
+  transition: none;
+}
+
+main h2:hover::after, aside h2:hover::after {
+  animation: escaneoLuz 0.8s ease forwards;
+}
+
+@keyframes escaneoLuz {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+main h2:hover, aside h2:hover {
+  color: #fff;
+  text-shadow: 0 0 10px var(--neon-cyan);
+  transform: translateX(4px);
+}
+
+/* Efecto innovador para los subtítulos (h3) con barra lateral expansiva */
+main h3 {
+  position: relative;
+  font-size: 1.35rem;
+  color: var(--neon-yellow);
+  margin: 2rem 0 0.8rem;
+  padding-left: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-left: 4px solid transparent;
+  transition: all 0.3s ease;
+}
+
+/* Barra lateral que se enciende y crece al pasar el ratón */
+main h3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: var(--neon-pink);
+  border-radius: 4px;
+  box-shadow: 0 0 10px var(--neon-pink);
+  transform: scaleY(0.3);
+  opacity: 0.4;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+main h3:hover::after {
+  transform: scaleY(1);
+  opacity: 1;
+  background: var(--neon-cyan);
+  box-shadow: 0 0 15px var(--neon-cyan);
+}
+
+main h3:hover {
+  color: #fff;
+  transform: translateX(6px);
+}
+/* ==========================================================================
+   9. MEJORAS ADICIONALES: BOTÓN "VOLVER ARRIBA" Y EFECTO SPOTLIGHT
+   ========================================================================== */
+
+/* --- Botón Flotante "Volver Arriba" --- */
+#btn-arriba {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 999;
+  background: rgba(15, 10, 40, 0.85);
+  backdrop-filter: blur(10px);
+  color: var(--neon-cyan);
+  border: 2px solid var(--neon-cyan);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0, 245, 212, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Clase que activará JavaScript cuando hagamos scroll hacia abajo */
+#btn-arriba.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#btn-arriba:hover {
+  background: var(--neon-cyan);
+  color: var(--bg-dark);
+  border-color: var(--neon-yellow);
+  box-shadow: 0 0 25px var(--neon-cyan);
+  transform: translateY(-4px) scale(1.1);
+}
+
+
+/* --- Efecto Spotlight (Destello de luz interactivo en la galería) --- */
+.galeria figure {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Capa de luz dinámica que sigue el cursor sobre la tarjeta */
+.galeria figure::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(0, 245, 212, 0.22),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.galeria figure:hover::before {
+  opacity: 1;
+}
